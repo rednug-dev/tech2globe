@@ -2,6 +2,7 @@
 
 import GlobeDots from "@/components/GlobeDots";
 import EquatorText3D from "@/components/EquatorText3D";
+import CenterMessage from "@/components/CenterMessage";
 
 export default function GlobeHero() {
   return (
@@ -25,6 +26,11 @@ export default function GlobeHero() {
             outline
         />
       </div>
+
+      <CenterMessage
+        title="Fokus i Norge: Digital markedsføring – E‑handel, butikkutvikling, SEO og helhetlig markedsføring"
+        subtitle="Som deres norske representasjon leverer vi strategi, design, utvikling og løpende vekstarbeid."
+      />
     </div>
   );
 }
