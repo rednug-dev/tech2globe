@@ -1,10 +1,10 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Navbar from "@/components/Navbar";
-import GlobeHero from "@/components/GlobeHero";
+import Navbar from "../components/Navbar";
+import GlobeHero from "../components/GlobeHero";
 
-const InfoSection = dynamic(() => import("@/components/InfoSection"), {
+const InfoSection = dynamic(() => import("../components/InfoSection"), {
   ssr: false,
   loading: () => (
     <section className="w-full max-w-6xl mx-auto px-4 py-16">
@@ -13,7 +13,7 @@ const InfoSection = dynamic(() => import("@/components/InfoSection"), {
   ),
 });
 
-const ServicesSection = dynamic(() => import("@/components/ServicesSection"), {
+const ServicesSection = dynamic(() => import("../components/ServicesSection"), {
   ssr: false,
   loading: () => (
     <section className="w-full max-w-6xl mx-auto px-4 py-16">
@@ -22,7 +22,7 @@ const ServicesSection = dynamic(() => import("@/components/ServicesSection"), {
   ),
 });
 
-const ContactSection = dynamic(() => import("@/components/ContactSection"), {
+const ContactSection = dynamic(() => import("../components/ContactSection"), {
   ssr: false,
   loading: () => (
     <section className="w-full max-w-6xl mx-auto px-4 py-16">
@@ -31,7 +31,7 @@ const ContactSection = dynamic(() => import("@/components/ContactSection"), {
   ),
 });
 
-const GetStartedSection = dynamic(() => import("@/components/GetStartedSection"), {
+const GetStartedSection = dynamic(() => import("../components/GetStartedSection"), {
   ssr: false,
   loading: () => (
     <section className="w-full max-w-6xl mx-auto px-4 py-16">

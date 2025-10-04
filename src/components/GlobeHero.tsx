@@ -1,6 +1,6 @@
 "use client";
 
-import GlobeDots from "@/components/GlobeDots";
+import GlobeDots from "./GlobeDots";
 import { motion } from "framer-motion";
 
 export default function GlobeHero() {
