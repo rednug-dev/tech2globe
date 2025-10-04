@@ -1,23 +1,14 @@
 @import "tailwindcss";
 
+/* Default to dark theme so white UI/text remains visible regardless of OS preference */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* Removed @theme inline to avoid build errors; Tailwind classes are used directly. */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* Removed light-mode override to force consistent dark theme */
 
 body {
   background: var(--background);
