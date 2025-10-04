@@ -22,6 +22,7 @@ export default function GlobeHero() {
           Tech<span className="text-[#e10600]">2</span>Globe
         </motion.h1>
       </div>
+
     </div>
   );
 }
