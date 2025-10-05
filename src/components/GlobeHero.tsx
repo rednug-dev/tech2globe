@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function GlobeHero() {
   return (
-    <div className="relative w-full h-[520px]">
+<div className="relative w-full h-[420px] sm:h-[520px]">
       {/* COBE (DOM-canvas) nederst */}
       <GlobeDots className="absolute inset-0 z-0" scale={1.15} speed={0.002} />
 

@@ -7,12 +7,12 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+<header className="fixed top-0 inset-x-0 z-50 border-b border-white/10 bg-black/70 supports-[backdrop-filter]:bg-black/30 backdrop-blur-md backdrop-saturate-150">
       <motion.nav
         initial={{ y: -12, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 160, damping: 20 }}
-        className="mx-auto w-full max-w-6xl px-4 py-3 flex items-center justify-between bg-black/80 border-b border-white/10 shadow-sm"
+        className="mx-auto w-full max-w-7xl px-4 py-3 flex items-center justify-between"
       >
         <a href="#hero" className="flex items-center gap-2 select-none">
           <span className="text-xl font-semibold text-white tracking-tight">
@@ -48,13 +48,14 @@ export default function Navbar() {
         {open && (
           <motion.div
             key="mobile-menu"
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ type: "spring", stiffness: 260, damping: 22 }}
-            className="md:hidden mx-auto w-full max-w-6xl px-4"
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="md:hidden mx-auto w-full max-w-7xl px-4"
+            style={{ willChange: "transform, opacity" }}
           >
-            <div className="mt-2 rounded-xl border border-white/10 bg-black/60 backdrop-blur p-3 text-sm text-white/90">
+            <div className="mt-2 rounded-xl border border-white/10 bg-black/70 supports-[backdrop-filter]:bg-black/30 backdrop-blur-md backdrop-saturate-150 p-3 text-sm text-white/90">
               <a className="block px-3 py-2 rounded-lg hover:bg-white/10" href="#hero" onClick={() => setOpen(false)}>Home</a>
               <a className="block px-3 py-2 rounded-lg hover:bg-white/10" href="#about" onClick={() => setOpen(false)}>About</a>
               <a className="block px-3 py-2 rounded-lg hover:bg-white/10" href="#services" onClick={() => setOpen(false)}>Services</a>
