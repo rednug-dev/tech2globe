@@ -26,12 +26,20 @@ export default function GlobeDots({
 
     const dpr = Math.min(window.devicePixelRatio ?? 1, 2);
 
-    const getResponsiveScale = (w: number) => {
-      if (w < 380) return 0.9;
-      if (w < 480) return 0.98;
-      if (w < 768) return 1.05;
-      if (w < 1024) return 1.12;
-      return 1.18;
+    const getResponsiveScale = (w: number, h: number) => {
+      // Width-based baseline (slightly larger on big screens)
+      let widthScale = 1.12;
+      if (w < 380) widthScale = 0.92;
+      else if (w < 480) widthScale = 1.0;
+      else if (w < 768) widthScale = 1.08;
+      else if (w < 1024) widthScale = 1.16;
+      else if (w < 1440) widthScale = 1.22;
+      else widthScale = 1.26;
+
+      // Height cap to prevent vertical clipping on wide screens
+      const heightCap = (h / Math.max(1, w)) * 1.7;
+
+      return Math.min(widthScale, heightCap);
     };
 
     const setCanvasSize = () => {
@@ -44,7 +52,7 @@ export default function GlobeDots({
 
     const buildGlobe = () => {
       const hostRect = containerRef.current!.getBoundingClientRect();
-      const responsiveScale = getResponsiveScale(hostRect.width) * scale;
+      const responsiveScale = getResponsiveScale(hostRect.width, hostRect.height) * scale;
       const globe = createGlobe(canvasRef.current!, {
         devicePixelRatio: dpr,
         width: canvasRef.current!.width,
@@ -106,7 +114,7 @@ export default function GlobeDots({
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`relative w-full h-[420px] sm:h-[520px] ${className}`}
     >
-      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
+      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full transform lg:-translate-y-2 xl:-translate-y-4 2xl:-translate-y-6" />
     </motion.div>
   );
 }
