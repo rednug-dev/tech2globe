@@ -19,6 +19,7 @@ export default function GlobeDots({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const phiRef = useRef(0);
   const currentSpeedRef = useRef(0);
+  const globeRef = useRef<any>(null);
 
   useEffect(() => {
     if (!canvasRef.current || !containerRef.current) return;
@@ -41,43 +42,61 @@ export default function GlobeDots({
       el.height = Math.max(1, Math.floor(rect.height * dpr));
     };
 
+    const buildGlobe = () => {
+      const hostRect = containerRef.current!.getBoundingClientRect();
+      const responsiveScale = getResponsiveScale(hostRect.width) * scale;
+      const globe = createGlobe(canvasRef.current!, {
+        devicePixelRatio: dpr,
+        width: canvasRef.current!.width,
+        height: canvasRef.current!.height,
+        phi: 0,
+        theta: 0,
+        dark: 1,
+        diffuse: 1.0,
+        scale: responsiveScale,
+        mapSamples: 24000,
+        mapBrightness: 9,
+        baseColor: [0.12, 0.12, 0.12],
+        glowColor: [0, 0, 0],
+        markerColor: [1, 1, 1],
+        markers: [],
+        onRender: (state) => {
+          // smooth startup
+          currentSpeedRef.current += (speed - currentSpeedRef.current) * 0.05;
+          phiRef.current += currentSpeedRef.current;
+          state.phi = phiRef.current;
+        },
+      });
+      return globe;
+    };
+
     setCanvasSize();
-    const ro = new ResizeObserver(setCanvasSize);
+    currentSpeedRef.current = 0;
+    globeRef.current = buildGlobe();
+
+    let resizeTimer: number | null = null;
+    const onResize = () => {
+      setCanvasSize();
+      if (globeRef.current) {
+        globeRef.current.destroy();
+        globeRef.current = null;
+      }
+      // small debounce to avoid thrashing during active resize
+      if (resizeTimer) window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        globeRef.current = buildGlobe();
+      }, 50);
+    };
+
+    const ro = new ResizeObserver(onResize);
     ro.observe(containerRef.current);
 
-    currentSpeedRef.current = 0;
-
-    const hostRect = containerRef.current.getBoundingClientRect();
-    const responsiveScale = getResponsiveScale(hostRect.width);
-
-    const globe = createGlobe(canvasRef.current, {
-      devicePixelRatio: dpr,
-      width: canvasRef.current.width,
-      height: canvasRef.current.height,
-      phi: 0,
-      theta: 0,
-      dark: 1,
-      diffuse: 1.0,
-      scale: responsiveScale,
-      mapSamples: 24000,
-      mapBrightness: 9,
-      baseColor: [0.12, 0.12, 0.12],
-      glowColor: [0, 0, 0],
-      markerColor: [1, 1, 1],
-      markers: [],
-      onRender: (state) => {
-        // ease current speed toward target for a smooth startup
-        currentSpeedRef.current += (speed - currentSpeedRef.current) * 0.05;
-        phiRef.current += currentSpeedRef.current;
-        state.phi = phiRef.current;
-      },
-    });
-
     return () => {
+      if (resizeTimer) window.clearTimeout(resizeTimer);
       ro.disconnect();
-      globe.destroy();
+      if (globeRef.current) globeRef.current.destroy();
     };
-  }, [speed]);
+  }, [scale, speed]);
 
   return (
     <motion.div

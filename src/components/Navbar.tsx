@@ -52,7 +52,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="md:hidden mx-auto w-full max-w-7xl px-4"
+className="md:hidden mx-auto w-full max-w-7xl px-4 mb-5"
             style={{ willChange: "transform, opacity" }}
           >
             <div className="mt-2 rounded-xl border border-white/10 bg-black/70 supports-[backdrop-filter]:bg-black/30 backdrop-blur-md backdrop-saturate-150 p-3 text-sm text-white/90">
