@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="w-full max-w-6xl mx-auto px-4 py-16">
+    <section id="services" className="w-full max-w-6xl mx-auto px-4 py-16 scroll-mt-24">
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}

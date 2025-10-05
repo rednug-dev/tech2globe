@@ -12,7 +12,7 @@ export default function Navbar() {
         initial={{ y: -12, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 160, damping: 20 }}
-        className="mx-auto w-full max-w-6xl px-4 py-3 flex items-center justify-between backdrop-blur bg-black/30 border-b border-white/10 rounded-b-xl"
+        className="mx-auto w-full max-w-6xl px-4 py-3 flex items-center justify-between bg-black/80 border-b border-white/10 shadow-sm"
       >
         <a href="#hero" className="flex items-center gap-2 select-none">
           <span className="text-xl font-semibold text-white tracking-tight">
@@ -21,7 +21,7 @@ export default function Navbar() {
         </a>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-6 text-sm">
+        <div className="hidden md:flex items-center gap-6 text-sm select-none">
           <a className="text-white/80 hover:text-white transition-colors" href="#hero">Home</a>
           <a className="text-white/80 hover:text-white transition-colors" href="#about">About</a>
           <a className="text-white/80 hover:text-white transition-colors" href="#services">Services</a>

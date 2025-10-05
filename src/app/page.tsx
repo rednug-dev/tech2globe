@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Navbar from "../components/Navbar";
 import GlobeHero from "../components/GlobeHero";
 
 const InfoSection = dynamic(() => import("../components/InfoSection"), {
@@ -42,17 +41,14 @@ const GetStartedSection = dynamic(() => import("../components/GetStartedSection"
 
 export default function Page() {
   return (
-    <>
-      <Navbar />
-      <main className="min-h-screen pt-20">
-        <section id="hero" className="w-full max-w-6xl mx-auto px-4">
-          <GlobeHero />
-        </section>
-        <InfoSection />
-        <ServicesSection />
-        <ContactSection />
-        <GetStartedSection />
-      </main>
-    </>
+    <main className="min-h-screen">
+      <section id="hero" className="w-full max-w-6xl mx-auto px-4">
+        <GlobeHero />
+      </section>
+      <InfoSection />
+      <ServicesSection />
+      <ContactSection />
+      <GetStartedSection />
+    </main>
   );
 }

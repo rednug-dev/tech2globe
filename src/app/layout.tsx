@@ -26,10 +26,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased overscroll-y-none`}
       >
-  <Navbar />
-  <div className="pt-14">{children}</div>
+        <Navbar />
+        <div className="pt-16">{children}</div>
       </body>
     </html>
   );
